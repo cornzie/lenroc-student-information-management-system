@@ -1,0 +1,125 @@
+-- phpMyAdmin SQL Dump
+-- version 2.11.6
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jun 16, 2015 at 09:44 AM
+-- Server version: 5.0.51
+-- PHP Version: 5.2.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `lenroc_ssims`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course`
+--
+
+CREATE TABLE `course` (
+  `course_code` varchar(128) NOT NULL,
+  `course_title` varchar(128) NOT NULL,
+  `course_unit` int(11) NOT NULL,
+  `semester` varchar(128) NOT NULL,
+  `level` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `active` varchar(11) NOT NULL default 'd',
+  PRIMARY KEY  (`course_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`course_code`, `course_title`, `course_unit`, `semester`, `level`, `department_id`, `active`) VALUES
+('CSC101', 'introduction to computer science', 3, '1', 100, 1, 'a'),
+('CSC301', 'Introduction to computer science 3', 2, '2', 300, 1, 'a'),
+('CSC411', 'Computer Architecture', 3, '1', 400, 1, 'a'),
+('MCB101', 'introduction to microbiology', 3, '1', 100, 2, 'd'),
+('MCB102', 'Introduction to microbiology 2', 3, '2', 100, 2, 'd');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `department`
+--
+
+CREATE TABLE `department` (
+  `department_id` int(11) NOT NULL,
+  `department_name` varchar(128) NOT NULL,
+  PRIMARY KEY  (`department_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`department_id`, `department_name`) VALUES
+(1, 'computer science and mathematics'),
+(2, 'basic science');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `registercourses`
+--
+
+CREATE TABLE `registercourses` (
+  `user_id` int(11) NOT NULL,
+  `username` varchar(128) NOT NULL,
+  `course_code` varchar(128) NOT NULL,
+  `selected` varchar(11) NOT NULL default 'reg'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `registercourses`
+--
+
+INSERT INTO `registercourses` (`user_id`, `username`, `course_code`, `selected`) VALUES
+(2, '11/0179', 'CSC101', 'reg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL auto_increment,
+  `username` varchar(1023) NOT NULL,
+  `password` varchar(1023) NOT NULL,
+  `firstname` varchar(32) NOT NULL,
+  `lastname` varchar(32) NOT NULL,
+  `faculty` varchar(255) NOT NULL,
+  `department` varchar(11) NOT NULL,
+  `course_of_study` varchar(255) NOT NULL,
+  `year_of_admission` varchar(255) NOT NULL,
+  `sex` varchar(255) NOT NULL,
+  `hostel` varchar(255) NOT NULL,
+  `medical_records` varchar(255) NOT NULL,
+  `financial_records` varchar(255) NOT NULL,
+  `library_records` varchar(255) NOT NULL,
+  `transcript_options` varchar(255) NOT NULL,
+  `email` varchar(1024) NOT NULL,
+  `email_code` varchar(32) NOT NULL,
+  `active` varchar(11) NOT NULL default 'd',
+  `password_recover` int(11) NOT NULL default '0',
+  `type` int(11) NOT NULL default '0',
+  `allow_email` int(11) NOT NULL default '1',
+  `profile` varchar(65) NOT NULL,
+  PRIMARY KEY  (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `password`, `firstname`, `lastname`, `faculty`, `department`, `course_of_study`, `year_of_admission`, `sex`, `hostel`, `medical_records`, `financial_records`, `library_records`, `transcript_options`, `email`, `email_code`, `active`, `password_recover`, `type`, `allow_email`, `profile`) VALUES
+(1, 'cornelius', '5f4dcc3b5aa765d61d8327deb882cf99', 'Cornelius', 'Udeh', '', '0', '', '', '', '', '', '', '', '', 'cornelius.udeh@yahoo.com', '', 'a', 0, 1, 1, 'img/profile/f89f638fca.jpg'),
+(2, '11/0179', '5f4dcc3b5aa765d61d8327deb882cf99', 'Cornelius', 'Udeh', 'Business and social sciences', '0', 'computer science', '2011', 'male', 'male hall', '', '', '', '', 'cornelius.doncollins.udeh@gmail.com', '0829f445efac37afd6d2ccd058212f60', 'a', 0, 0, 1, 'img/profile/f8916adecf.jpg'),
+(3, 'tomide', '5f4dcc3b5aa765d61d8327deb882cf99', 'Tomide', 'Adedeji', 'sciences', '0', '', '', 'male', 'male hall', '', '', '', '', 'tommyverciti@yahoo.com', '5806557dc0b2e9836f7bcbd254d0bf5a', 'a', 0, 2, 1, ''),
+(4, '13/0211', '5f4dcc3b5aa765d61d8327deb882cf99', 'Ismail', 'Kadir', 'sciences', 'basic scien', '2', '2013', 'male', 'male hall', '', '', '', '', 'ismailkadir63@yahoo.com', 'c4a2a007b3de20a4381348205dba516c', 'd', 0, 5, 1, ''),
+(5, '11/0001', '5f4dcc3b5aa765d61d8327deb882cf99', 'Babatope', 'Aina', 'sciences', 'computer sc', '1', '2011', 'male', 'male hall', '', '', '', '', 'ainathegreat27@gmail.com', 'ed0b926e206f583e1a7036cc32689b3f', 'a', 0, 5, 1, '');
